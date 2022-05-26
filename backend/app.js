@@ -3,6 +3,7 @@ const app = express();
 const cookieParser = require("cookie-parser");
 const multer = require('multer');
 const path = require("path");
+import { join } from 'path';
 
 if(process.env.NODE_ENV !== "production") {
   require("dotenv").config({ path: "backend/config/config.env" });
@@ -23,10 +24,10 @@ const User = require("./models/User");
 app.use("/api/v1", post);
 app.use("/api/v1", user);
 
-app.use(express.static(path.join)(__dirname, "../frontend/build"));
+app.use(express.static(path.join)(__dirname, '..', "../frontend/build"));
 
 app.get("*", (req, res) => {
-  res.sendFile(path.resolve(__dirname, "../frontend/build/index.html"));
+  res.sendFile(path.resolve(__dirname, '..', "../frontend/build/index.html"));
 });
 
 module.exports = app;
